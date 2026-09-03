@@ -78,32 +78,32 @@ const faqSchemaData = {
 
 const inclusions = [
   {
-    icon: <ShieldCheck className="h-7 w-7 text-purple-600" />,
+    icon: <ShieldCheck className="h-6 w-6" />,
     title: "100% Confidentiality",
     desc: "Your identity and project details stay completely private, protected by strict non-disclosure agreements."
   },
   {
-    icon: <UserCheck className="h-7 w-7 text-purple-600" />,
+    icon: <UserCheck className="h-6 w-6" />,
     title: "Your Voice, Your Story",
     desc: "We study your tone and personality closely so the final manuscript sounds authentically like you."
   },
   {
-    icon: <RotateCcw className="h-7 w-7 text-purple-600" />,
+    icon: <RotateCcw className="h-6 w-6" />,
     title: "Unlimited Revisions",
     desc: "We refine chapters until they match your vision, with no limit on how many rounds it takes."
   },
   {
-    icon: <BookOpen className="h-7 w-7 text-purple-600" />,
+    icon: <BookOpen className="h-6 w-6" />,
     title: "Experienced Genre Writers",
     desc: "Our team includes specialists across fiction, memoir, business, and self-help genres."
   },
   {
-    icon: <Clock className="h-7 w-7 text-purple-600" />,
+    icon: <Clock className="h-6 w-6" />,
     title: "On-Time Delivery",
     desc: "Every project follows a clear timeline, so your manuscript is ready exactly when promised."
   },
   {
-    icon: <DollarSign className="h-7 w-7 text-purple-600" />,
+    icon: <DollarSign className="h-6 w-6" />,
     title: "Full Ownership & Royalties",
     desc: "You retain complete legal rights and all royalties for the book we write for you."
   }
@@ -138,11 +138,381 @@ const clientReviews = [
   }
 ];
 
+const ghostPageCss = `
+  .gw-hero {
+    background: linear-gradient(135deg, #0d1b3e 0%, #3b0764 50%, #1a0b2e 100%);
+    padding: 100px 0 85px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+  .gw-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .gw-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: rgba(163, 133, 214, 0.22);
+    color: #e9d5ff !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 1px solid rgba(163, 133, 214, 0.35);
+    margin-bottom: 20px;
+  }
+  .gw-hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    color: #ffffff !important;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .gw-hero p.lead {
+    color: #cbd5e1 !important;
+    font-size: 1.15rem;
+    line-height: 1.75;
+    margin-bottom: 34px;
+    max-width: 620px;
+  }
+  .gw-hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .gw-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 32px;
+    border-radius: 999px;
+    background: #e63946 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    box-shadow: 0 10px 25px -5px rgba(230, 57, 70, 0.5);
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .gw-btn-primary:hover {
+    background: #b22234 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(230, 57, 70, 0.6);
+  }
+  .gw-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 32px;
+    border-radius: 999px;
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 255, 255, 0.8) !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .gw-btn-outline:hover {
+    background: #ffffff !important;
+    color: #0d1b3e !important;
+    transform: translateY(-2px);
+  }
+  .gw-hero-img-wrap {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .gw-hero-img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .gw-overview-section {
+    padding: 85px 0;
+    background: #ffffff;
+    text-align: center;
+  }
+  .gw-subhead {
+    display: inline-block;
+    color: #e63946;
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+  }
+  .gw-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: #0f172a !important;
+    margin-bottom: 20px;
+  }
+  .gw-lead-p {
+    color: #475569 !important;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .gw-inclusions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+  .gw-card {
+    background: #ffffff;
+    border: 1px solid #e6e2ee;
+    border-radius: 20px;
+    padding: 34px 28px;
+    box-shadow: 0 10px 30px -10px rgba(13, 27, 62, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+  .gw-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 45px -10px rgba(122, 79, 191, 0.2);
+    border-color: #a385d6;
+  }
+  .gw-card-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: #efe8fb;
+    color: #5b2fa0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .gw-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a !important;
+    margin-bottom: 12px;
+  }
+  .gw-card p {
+    color: #64748b !important;
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+  .gw-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+  .gw-step-card {
+    background: #ffffff;
+    border: 1px solid #e6e2ee;
+    border-radius: 18px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.25s ease;
+  }
+  .gw-step-card:hover {
+    transform: translateY(-5px);
+    border-color: #7a4fbf;
+  }
+  .gw-step-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #5b2fa0;
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .gw-step-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a !important;
+    margin-bottom: 8px;
+  }
+  .gw-step-card p {
+    color: #64748b !important;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .gw-ebook-banner {
+    background: linear-gradient(135deg, #0d1b3e 0%, #3b0764 100%);
+    color: #ffffff;
+    padding: 85px 0;
+    text-align: center;
+  }
+  .gw-ebook-banner h2 {
+    color: #ffffff !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 2.7rem);
+    margin: 16px 0 20px;
+  }
+  .gw-ebook-banner p {
+    color: #f1f5f9 !important;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .gw-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .gw-trust-card {
+    background: #ffffff;
+    border: 1px solid #e6e2ee;
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  }
+  .gw-trust-card h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a !important;
+    margin-bottom: 4px;
+  }
+  .gw-trust-card p {
+    color: #64748b !important;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .gw-genres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 44px;
+  }
+  .gw-genre-card {
+    padding: 32px 28px;
+    border-radius: 20px;
+    border: 1px solid #e6e2ee;
+  }
+  .gw-genre-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .gw-genre-card p {
+    color: #334155 !important;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .gw-reviews-section {
+    background: #0d1b3e;
+    color: #ffffff;
+    padding: 90px 0;
+  }
+  .gw-reviews-section h2 {
+    color: #ffffff !important;
+  }
+  .gw-review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 44px;
+  }
+  .gw-review-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 32px 26px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .gw-review-card .stars {
+    color: #f59e0b;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+  .gw-review-card p {
+    color: #e2e8f0 !important;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .gw-review-card strong {
+    color: #ffffff !important;
+    display: block;
+    font-size: 1rem;
+  }
+  .gw-review-card small {
+    color: #94a3b8 !important;
+    font-size: 0.85rem;
+  }
+  .gw-cta-banner {
+    background: linear-gradient(135deg, #5b2fa0 0%, #0d1b3e 100%);
+    border-radius: 24px;
+    padding: 70px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin: 60px 0;
+  }
+  .gw-cta-banner h2 {
+    color: #ffffff !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 3.5vw, 2.6rem);
+    margin-bottom: 16px;
+  }
+  .gw-cta-banner p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.15rem;
+    max-width: 680px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+  }
+  @media(max-width: 992px) {
+    .gw-hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .gw-hero-ctas { justify-content: center; }
+    .gw-inclusions-grid { grid-template-columns: repeat(2, 1fr); }
+    .gw-steps-grid { grid-template-columns: repeat(3, 1fr); }
+    .gw-genres-grid { grid-template-columns: 1fr; }
+    .gw-review-grid { grid-template-columns: 1fr; }
+    .gw-trust-grid { grid-template-columns: 1fr; }
+  }
+  @media(max-width: 640px) {
+    .gw-inclusions-grid { grid-template-columns: 1fr; }
+    .gw-steps-grid { grid-template-columns: 1fr; }
+  }
+`;
+
 export function GhostWritingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
     <div className="page-shell">
+      <style dangerouslySetInnerHTML={{ __html: ghostPageCss }} />
+
       {/* FAQPage Schema Markup for Google Search Rich Snippets */}
       <script
         type="application/ld+json"
@@ -153,46 +523,33 @@ export function GhostWritingPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-slate-900 via-purple-950 to-indigo-900 text-white py-16 md:py-24 relative overflow-hidden">
-          <div className="container mx-auto px-4 max-w-7xl relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-200 text-sm font-semibold">
-                  <Feather className="h-4 w-4 text-purple-400" /> #1 Ghostwriting Agency in USA
+        <section className="gw-hero">
+          <div className="container">
+            <div className="gw-hero-grid">
+              <div>
+                <span className="gw-eyebrow">
+                  <Feather className="h-4 w-4" /> #1 Ghostwriting Agency in USA
                 </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-serif leading-tight">
-                  Professional Ghost Writing Services in the USA
-                </h1>
-                <p className="text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed">
+                <h1>Professional Ghost Writing Services in the USA</h1>
+                <p className="lead">
                   Have a story in your head but no time or skill to write it? Our expert ghost writing services turn your ideas into a polished, publish-ready manuscript in your own voice.
                 </p>
-                <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4">
-                  <a 
-                    href="#request-quote" 
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-base transition shadow-lg shadow-red-600/30"
-                  >
+                <div className="gw-hero-ctas">
+                  <a href="#request-quote" className="gw-btn-primary">
                     <Send className="h-4 w-4" /> Get Free Consultation
                   </a>
-                  <a 
-                    href="tel:+13467085688" 
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-base transition backdrop-blur-md"
-                  >
+                  <a href="tel:+13467085688" className="gw-btn-outline">
                     <MessageSquare className="h-4 w-4" /> Start Live Chat
                   </a>
                 </div>
               </div>
 
-              <div className="lg:col-span-5">
-                <div className="relative mx-auto max-w-md rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+              <div>
+                <div className="gw-hero-img-wrap">
                   <img 
                     src="/assets/images/ghostwriting-hero.jpg" 
-                    alt="Ghostwriting services in the USA. Turning author ideas into a written manuscript"
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-500"
+                    alt="Ghostwriting services in the USA. Turning author ideas into a written manuscript" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium">
-                    ✨ Turning author ideas into market-ready published manuscripts.
-                  </div>
                 </div>
               </div>
             </div>
@@ -200,39 +557,33 @@ export function GhostWritingPage() {
         </section>
 
         {/* What Are Ghost Writing Services */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-5xl text-center">
-            <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-3">Overview</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900 mb-8">
-              What Are Ghost Writing Services?
-            </h2>
-            <p className="text-slate-600 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+        <section className="gw-overview-section">
+          <div className="container">
+            <span className="gw-subhead">Overview</span>
+            <h2 className="gw-heading">What Are Ghost Writing Services?</h2>
+            <p className="gw-lead-p">
               Ghost writing services connect authors with skilled writers who craft their book from scratch while keeping the author as the sole credited voice. Whether you have a rough idea, a set of notes, or just a vision in your head, our writers turn that into a complete, professionally written manuscript through our ghost book writing services. You share the story; we shape the words, so your book reads exactly the way you imagined it, without you having to write a single chapter yourself.
             </p>
           </div>
         </section>
 
         {/* Inclusions Section */}
-        <section className="py-20 bg-slate-50 border-y border-slate-200">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-2">Service Highlights</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900">
-                What Our Ghost Book Writing Services Include
-              </h2>
-              <p className="text-slate-600 mt-4 text-lg">
+        <section style={{ padding: "85px 0", background: "#f8f9fa", borderTop: "1px solid #e6e2ee", borderBottom: "1px solid #e6e2ee" }}>
+          <div className="container">
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto" }}>
+              <span className="gw-subhead">Service Highlights</span>
+              <h2 className="gw-heading">What Our Ghost Book Writing Services Include</h2>
+              <p style={{ color: "#64748b", fontSize: "1.1rem" }}>
                 Every author deserves a team that treats their story with care from the very first page to the last.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="gw-inclusions-grid">
               {inclusions.map((item) => (
-                <div key={item.title} className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
-                  <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-6">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">{item.desc}</p>
+                <div className="gw-card" key={item.title}>
+                  <div className="gw-card-icon">{item.icon}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -240,26 +591,22 @@ export function GhostWritingPage() {
         </section>
 
         {/* Workflow / How It Works */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-2">Step-By-Step</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900">
-                How Our Ghostwriting Services Work
-              </h2>
-              <p className="text-slate-600 mt-4 text-lg">
+        <section style={{ padding: "85px 0", background: "#ffffff" }}>
+          <div className="container">
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto" }}>
+              <span className="gw-subhead">Step-By-Step</span>
+              <h2 className="gw-heading">How Our Ghostwriting Services Work</h2>
+              <p style={{ color: "#64748b", fontSize: "1.1rem" }}>
                 Getting your book written doesn't have to be complicated. Our five-step process keeps you informed and involved without overwhelming you with the technical work.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div className="gw-steps-grid">
               {workflowSteps.map((step) => (
-                <div key={step.num} className="bg-purple-50/60 p-6 rounded-2xl border border-purple-100 flex flex-col text-center items-center">
-                  <div className="w-12 h-12 rounded-full bg-purple-900 text-white font-extrabold flex items-center justify-center text-lg mb-4 shadow-md">
-                    {step.num}
-                  </div>
-                  <h4 className="font-bold text-slate-900 mb-2 text-base">{step.title}</h4>
-                  <p className="text-slate-600 text-xs leading-relaxed">{step.desc}</p>
+                <div className="gw-step-card" key={step.num}>
+                  <div className="gw-step-num">{step.num}</div>
+                  <h4>{step.title}</h4>
+                  <p>{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -267,57 +614,53 @@ export function GhostWritingPage() {
         </section>
 
         {/* Specialized eBook Ghostwriting Services */}
-        <section className="py-20 bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white">
-          <div className="container mx-auto px-4 max-w-5xl text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-purple-200 text-xs font-bold uppercase tracking-wider mb-6">
-              <Sparkles className="h-4 w-4 text-amber-400" /> Digital First Publishing
-            </div>
-            <h2 className="text-3xl md:text-4xl font-extrabold font-serif mb-6">
-              Specialized eBook Ghostwriting Services
-            </h2>
-            <p className="text-slate-200 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
+        <section className="gw-ebook-banner">
+          <div className="container">
+            <span className="gw-eyebrow" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.25)" }}>
+              <Sparkles className="h-4 w-4" /> Digital Publishing
+            </span>
+            <h2>Specialized eBook Ghostwriting Services</h2>
+            <p>
               Digital publishing has changed how readers discover new authors, and our ebook ghostwriting services are built specifically for that shift. From Kindle-ready formatting to concise, engaging chapters designed for online readers, we help you create an eBook that performs well on platforms like Amazon KDP. Whether it's a short guide or a full-length digital title, our writers craft content that fits the pace and expectations of today's eBook audience.
             </p>
           </div>
         </section>
 
         {/* Why Authors Trust Us */}
-        <section className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="text-center max-w-3xl mx-auto mb-14">
-              <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-2">Proven Track Record</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900">
-                Why Authors Trust Our Ghostwriting Services
-              </h2>
+        <section style={{ padding: "85px 0", background: "#f8f9fa" }}>
+          <div className="container" style={{ maxWidth: "1040px" }}>
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto" }}>
+              <span className="gw-subhead">Credibility</span>
+              <h2 className="gw-heading">Why Authors Trust Our Ghostwriting Services</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0 mt-1" />
+            <div className="gw-trust-grid">
+              <div className="gw-trust-card">
+                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0" />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">Over 8 Years of Experience</h4>
-                  <p className="text-slate-600 text-sm">Helping authors across the USA bring their stories to life with industry standards.</p>
+                  <h4>Over 8 Years Experience</h4>
+                  <p>Helping authors across the USA bring their stories to life.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0 mt-1" />
+              <div className="gw-trust-card">
+                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0" />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">2,500+ Satisfied Clients</h4>
-                  <p className="text-slate-600 text-sm">Successful projects delivered across fiction, non-fiction, memoir, and business writing.</p>
+                  <h4>2,500+ Satisfied Clients</h4>
+                  <p>Across fiction, non-fiction, memoir, and business writing.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0 mt-1" />
+              <div className="gw-trust-card">
+                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0" />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">Custom-Matched Genre Writers</h4>
-                  <p className="text-slate-600 text-sm">Writers matched specifically to your genre, voice, and subject matter—never a generic template.</p>
+                  <h4>Matched to Your Genre & Tone</h4>
+                  <p>Writers matched to your unique voice, not a generic template.</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
-                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0 mt-1" />
+              <div className="gw-trust-card">
+                <CheckCircle2 className="h-6 w-6 text-purple-700 shrink-0" />
                 <div>
-                  <h4 className="font-bold text-slate-900 text-lg mb-1">Full Author Control & Transparency</h4>
-                  <p className="text-slate-600 text-sm">Transparent process with regular check-ins, outline approvals, and complete feedback loops.</p>
+                  <h4>Transparent Process</h4>
+                  <p>Regular check-ins, outline reviews, and full author control.</p>
                 </div>
               </div>
             </div>
@@ -325,42 +668,34 @@ export function GhostWritingPage() {
         </section>
 
         {/* Genres Covered */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-2">Versatile Expertise</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900">
-                Genres We Cover in Our Ghost Book Writing Services
-              </h2>
-              <p className="text-slate-600 mt-4 text-lg">
+        <section style={{ padding: "85px 0", background: "#ffffff" }}>
+          <div className="container">
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto" }}>
+              <span className="gw-subhead">Genres</span>
+              <h2 className="gw-heading">Genres We Cover in Our Ghost Book Writing Services</h2>
+              <p style={{ color: "#64748b", fontSize: "1.1rem" }}>
                 Our ghost book writing services span a wide range of genres, so no matter what story you're trying to tell, we have a writer who understands it.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-8 rounded-3xl bg-purple-50/50 border border-purple-100">
-                <h3 className="text-2xl font-bold font-serif text-purple-950 mb-4 pb-2 border-b border-purple-200">
-                  Fiction
-                </h3>
-                <p className="text-slate-700 text-sm leading-relaxed">
+            <div className="gw-genres-grid">
+              <div className="gw-genre-card" style={{ background: "#fbf7ff", borderColor: "#e9d5ff" }}>
+                <h3 style={{ color: "#5b2fa0" }}>Fiction</h3>
+                <p>
                   Fantasy, Science Fiction, Mystery, Thriller, Horror, Romance, Historical Fiction, Young Adult (YA), Crime, Action, Dystopian, Paranormal, Western, Adventure, Suspense, War/Military Fiction, Coming-of-Age
                 </p>
               </div>
 
-              <div className="p-8 rounded-3xl bg-indigo-50/50 border border-indigo-100">
-                <h3 className="text-2xl font-bold font-serif text-indigo-950 mb-4 pb-2 border-b border-indigo-200">
-                  Non-Fiction
-                </h3>
-                <p className="text-slate-700 text-sm leading-relaxed">
+              <div className="gw-genre-card" style={{ background: "#f4f7ff", borderColor: "#dbeafe" }}>
+                <h3 style={{ color: "#1e40af" }}>Non-Fiction</h3>
+                <p>
                   Memoir, Autobiography, Biography, Self-Help, Business, Health & Wellness, True Crime, Philosophy, Psychology, Parenting, Finance, Science, Politics, Sports, Motivational, Educational/Academic
                 </p>
               </div>
 
-              <div className="p-8 rounded-3xl bg-slate-100/70 border border-slate-200">
-                <h3 className="text-2xl font-bold font-serif text-slate-900 mb-4 pb-2 border-b border-slate-300">
-                  Specialty
-                </h3>
-                <p className="text-slate-700 text-sm leading-relaxed">
+              <div className="gw-genre-card" style={{ background: "#f8fafc", borderColor: "#e2e8f0" }}>
+                <h3 style={{ color: "#0f172a" }}>Specialty</h3>
+                <p>
                   Children's Books, Poetry, Drama, Satire, Short Stories, Religious/Spiritual, Cookbooks, Travel, Humor, Graphic Novels/Comics, Anthology, Fairy Tales, Mythology
                 </p>
               </div>
@@ -368,30 +703,31 @@ export function GhostWritingPage() {
           </div>
         </section>
 
-        {/* Reviews Section */}
-        <section className="py-20 bg-slate-900 text-white">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-purple-400 font-extrabold uppercase tracking-wider text-sm block mb-2">Testimonials</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-white">
-                What Our Clients Say
-              </h2>
+        {/* Client Reviews */}
+        <section className="gw-reviews-section">
+          <div className="container">
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto" }}>
+              <span className="gw-subhead" style={{ color: "#a385d6" }}>Testimonials</span>
+              <h2 className="gw-heading">What Our Clients Say</h2>
+              <p style={{ color: "#cbd5e1", fontSize: "1.1rem" }}>
+                Real stories from authors who transformed their manuscript into published success.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="gw-review-grid">
               {clientReviews.map((rev) => (
-                <div key={rev.name} className="bg-slate-800/80 p-8 rounded-3xl border border-slate-700 flex flex-col justify-between">
+                <div className="gw-review-card" key={rev.name}>
                   <div>
-                    <div className="flex gap-1 text-amber-400 mb-4">
+                    <div className="stars">
                       {[...Array(rev.stars)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-amber-400" />
+                        <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400 inline mr-1" />
                       ))}
                     </div>
-                    <p className="text-slate-300 text-sm leading-relaxed mb-6">"{rev.text}"</p>
+                    <p>"{rev.text}"</p>
                   </div>
                   <div>
-                    <strong className="block text-white font-bold">{rev.name}</strong>
-                    <span className="text-xs text-slate-400">{rev.role}</span>
+                    <strong>{rev.name}</strong>
+                    <small>{rev.role}</small>
                   </div>
                 </div>
               ))}
@@ -399,52 +735,38 @@ export function GhostWritingPage() {
           </div>
         </section>
 
-        {/* Request Quote Component */}
+        {/* Quote Form Section */}
         <QuoteSection />
 
         {/* CTA Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 max-w-5xl">
-            <div className="bg-gradient-to-r from-purple-900 to-indigo-900 rounded-3xl p-10 md:p-16 text-center text-white shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif mb-4">
-                Ready to Start Your Ghostwriting Services Journey?
-              </h2>
-              <p className="text-slate-200 text-base md:text-lg max-w-2xl mx-auto mb-8">
-                Let our writers turn your idea into a professionally written manuscript, without you writing a single word.
-              </p>
-              <a 
-                href="#request-quote" 
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-base transition shadow-lg shadow-red-600/30"
-              >
-                Request a Free Quote
-              </a>
-            </div>
+        <div className="container">
+          <div className="gw-cta-banner">
+            <h2>Ready to Start Your Ghostwriting Services Journey?</h2>
+            <p>Let our writers turn your idea into a professionally written manuscript, without you writing a single word.</p>
+            <a href="#request-quote" className="gw-btn-primary">
+              <Send className="h-4 w-4" /> Request a Free Quote
+            </a>
           </div>
-        </section>
+        </div>
 
-        {/* FAQ Section */}
-        <section className="py-20 bg-slate-50 border-t border-slate-200" id="faq">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="text-purple-600 font-extrabold uppercase tracking-wider text-sm block mb-2">FAQ</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold font-serif text-slate-900">
-                Frequently Asked Questions About Ghost Writing Services
-              </h2>
+        {/* FAQ Section with Schema Support */}
+        <section className="faq-section" id="faq">
+          <div className="container">
+            <div style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto", marginBottom: "48px" }}>
+              <span className="gw-subhead">FAQ</span>
+              <h2 className="gw-heading">Frequently Asked Questions About Ghost Writing Services</h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="faq-list">
               {ghostFaqs.map((faq, idx) => (
-                <div key={faq.question} className="bg-white rounded-2xl border border-slate-200 overflow-hidden transition shadow-sm">
-                  <button 
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full text-left p-6 font-bold text-slate-900 text-lg flex justify-between items-center gap-4 hover:text-purple-700 transition"
-                  >
+                <div className={`faq-item ${openFaq === idx ? "open" : ""}`} key={faq.question}>
+                  <button className="faq-button" onClick={() => setOpenFaq(openFaq === idx ? null : idx)}>
                     <span>{faq.question}</span>
-                    <ChevronDown className={`h-5 w-5 text-purple-600 shrink-0 transform transition-transform ${openFaq === idx ? "rotate-180" : ""}`} />
+                    <span style={{ fontSize: "1.3rem", fontWeight: 800 }}>{openFaq === idx ? "−" : "+"}</span>
                   </button>
                   {openFaq === idx && (
-                    <div className="px-6 pb-6 text-slate-600 text-base leading-relaxed border-t border-slate-100 pt-4">
-                      {faq.answer}
+                    <div className="faq-answer">
+                      <p>{faq.answer}</p>
                     </div>
                   )}
                 </div>
@@ -460,4 +782,3 @@ export function GhostWritingPage() {
     </div>
   );
 }
-
